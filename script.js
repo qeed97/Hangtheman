@@ -13,5 +13,25 @@ function displayByLetter (word, classOf){
     });
 }
 
-displayByLetter(abc, 'alphabet');
-displayByLetter(secretword, 'secretWord');
+const loadEvent = () => {
+
+    const startButton = document.querySelector('.startGame');
+
+    startButton.addEventListener('click', () => {
+
+        displayByLetter(abc, 'alphabet');
+
+        displayByLetter(secretword, 'secretWord');
+
+    });
+
+    const alphabetDiv = document.querySelectorAll('.letter');
+
+    alphabetDiv.forEach(letterdiv => {
+        letterdiv.addEventListener('click', event => {
+            console.log(event.target.textContent);
+        });
+    });
+}
+
+window.addEventListener('load',loadEvent);
