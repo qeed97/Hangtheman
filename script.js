@@ -1,3 +1,5 @@
+import { words } from './data.js';
+console.log(words);
 let abc = "abcdefghijklmnopqrstuvwxyz";
 
 let secretword = "codecool";
