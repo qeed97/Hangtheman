@@ -1,4 +1,4 @@
-let abc = "abcdefghijklmnopqrstuvwxyz".split();
+let abc = "abcdefghijklmnopqrstuvwxyz".split('');
 
 const divAbc = document.querySelector('.alphabet');
 
