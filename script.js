@@ -2,22 +2,36 @@ let abc = "abcdefghijklmnopqrstuvwxyz";
 
 let secretword = "codecool";
 
-function displayByLetter (word, classOf, clicked = ''){
+function displayByLetter (word, classOf){
 
     word = word.split('');
     
     const divTarget = document.querySelector(`.${classOf}`);
 
-    divTarget.innerHTML = '';
-
     word.forEach(letter => {
-        divTarget.insertAdjacentHTML('beforeend',`<div class='${classOf === 'alphabet' ? 'letter' : 'secret'}'>${classOf === 'alphabet' || clicked === letter ? letter : ''}</div>`);
+        divTarget.insertAdjacentHTML('beforeend',`<div class='${classOf === 'alphabet' ? 'letter' : 'secret'}'>${classOf === 'alphabet' ? letter : ''}</div>`);
     });
+}
+
+function getMatchingIndexes (clicked)  {
+    let mathingIndex = [];
+    secretword.split('').forEach((letter,index) => {
+        if (clicked === letter){
+            mathingIndex.push(index);
+        }
+    });
+    return mathingIndex;
 }
 
 function checkClickedInSecret (clicked){
     if (secretword.includes(clicked)) {
-        displayByLetter(secretword, 'secretWord', clicked);
+        const mathingIndexes = getMatchingIndexes(clicked);
+        secretword.split('').forEach((element,index) => {
+           if (mathingIndexes.includes(index)){
+            const secretDivs = document.querySelectorAll('.secret');
+            secretDivs[index].textContent = element;
+           }
+        });
     } 
 } 
 
