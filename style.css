@@ -63,7 +63,8 @@ main {
     background-color: aquamarine;
 }
 
-.letter {
+.letter,
+.secret {
     position: relative;
     width: 100px;
     height: 100px;
