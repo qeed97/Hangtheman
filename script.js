@@ -1,7 +1,17 @@
-let abc = "abcdefghijklmnopqrstuvwxyz".split('');
+let abc = "abcdefghijklmnopqrstuvwxyz";
 
-const divAbc = document.querySelector('.alphabet');
+let secretword = "codecool";
 
-abc.forEach(word => {
-    divAbc.insertAdjacentHTML('beforeend',`<div class='letter'>${word}</div>`);
-})
+function displayByLetter (word, classOf){
+
+    word = word.split('');
+    
+    const divTarget = document.querySelector(`.${classOf}`);
+
+    word.forEach(letter => {
+        divTarget.insertAdjacentHTML('beforeend',`<div class='${classOf === 'alphabet' ? 'letter' : 'secret'}'>${classOf === 'alphabet' ? letter : ''}</div>`);
+    });
+}
+
+displayByLetter(abc, 'alphabet');
+displayByLetter(secretword, 'secretWord');
