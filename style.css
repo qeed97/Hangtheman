@@ -82,9 +82,12 @@ main {
 
 .disabled {
     pointer-events: none;
-    background-color: gray;
 }
 
 .letter{
     cursor: pointer;
+}
+
+.disabledcolor{
+    background-color: gray;
 }

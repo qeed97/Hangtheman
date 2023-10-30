@@ -8,6 +8,8 @@ let life = 7;
 
 let winCounter = 0;
 
+const playAreaDiv = document.querySelector('.play-area');
+
 function displayByLetter (word, classOf){
 
     life = 7;
@@ -79,12 +81,43 @@ function checkClickedInSecret (clicked){
 function isGameOver (){
     if (life === 0){
         infoDiv.textContent = 'you lost';
-        return true
+        playAreaDiv.classList.add('disabled');
     }
     else if (life > 0 && secretword.length === winCounter){
         infoDiv.textContent = 'you won';
-        return false
+        playAreaDiv.classList.add('disabled');
     }
+}
+
+function startGame (){
+
+    playAreaDiv.classList.remove('disabled');
+
+    displayByLetter(abc, 'alphabet');
+
+    displayByLetter(secretword, 'secretWord');
+    
+    infoDiv.textContent = 'Please click on a letter!';
+
+    const alphabetDiv = document.querySelectorAll('.letter');
+
+    alphabetDiv.forEach(letterdiv => {
+
+        letterdiv.addEventListener('click', event => {
+
+            event.target.classList.add('disabled','disabledcolor');
+
+            checkClickedInSecret(event.target.textContent);
+
+            console.log(event.target.textContent);
+
+            isGameOver();
+
+            console.log(winCounter);
+
+        });
+
+    });
 }
 
 const loadEvent = () => {
@@ -93,36 +126,7 @@ const loadEvent = () => {
 
     const startButton = document.querySelector('.startGame');
 
-    startButton.addEventListener('click', () => {
-
-        displayByLetter(abc, 'alphabet');
-
-        displayByLetter(secretword, 'secretWord');
-        
-        infoDiv.textContent = 'Please click on a letter!';
-
-        const alphabetDiv = document.querySelectorAll('.letter');
-    
-        alphabetDiv.forEach(letterdiv => {
-
-            letterdiv.addEventListener('click', event => {
-
-                event.target.classList.add('disabled');
-
-                checkClickedInSecret(event.target.textContent);
-
-                console.log(event.target.textContent);
-
-                isGameOver();
-
-                console.log(winCounter);
-
-            });
-
-        });
-
-
-    });
+    startButton.addEventListener('click',startGame);
 
 }
 
