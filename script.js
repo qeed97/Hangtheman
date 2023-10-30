@@ -1,8 +1,10 @@
 import { words } from './data.js';
-console.log(words);
+
+//console.log(words);
+
 let abc = "abcdefghijklmnopqrstuvwxyz";
 
-let secretword = "codecool";
+let secretword 
 
 const infoDiv = document.querySelector('.info');
 
@@ -92,6 +94,10 @@ function isGameOver (){
 }
 
 function startGame (){
+
+    secretword = words[Math.round(Math.random()*words.length)];
+
+    console.log(secretword);
 
     playAreaDiv.classList.remove('disabled');
 
