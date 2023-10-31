@@ -81,7 +81,7 @@ function checkClickedInSecret (clicked){
         hangManDiv.innerHTML = `<img src=img/health${life}.png />`;
 
         if (life > 0){
-            infoDiv.textContent = `Wrong you lost a life, you only have ${life} left`;
+            infoDiv.textContent = `Wrong you lost a life! You only have ${life} left!`;
             setTimeout(() => {
                 infoDiv.textContent = 'Please click on a letter!';
             },1000);
@@ -92,12 +92,12 @@ function checkClickedInSecret (clicked){
 
 function isGameOver (){
     if (life === 0){
-        infoDiv.textContent = 'you lost';
+        infoDiv.textContent = 'You Lost!';
         playAreaDiv.classList.add('disabled');
         displayByLetter(secretword,'secretWord', true);
     }
     else if (life > 0 && secretword.length === winCounter){
-        infoDiv.textContent = 'you won';
+        infoDiv.textContent = 'You Won!';
         playAreaDiv.classList.add('disabled');
         hangManDiv.innerHTML = `<img src=img/victoryIMG.png />`
     }
@@ -106,6 +106,7 @@ function isGameOver (){
 function startGame (){
 
     life = 7;
+    winCounter = 0;
 
     secretword = words[Math.round(Math.random()*words.length)];
 
@@ -146,7 +147,7 @@ function startGame (){
 
 const loadEvent = () => {
 
-    infoDiv.textContent = 'Welcome! Please select start'
+    infoDiv.textContent = "Welcome! Press 'New Game' to start the game!";
 
     const startButton = document.querySelector('.startGame');
 
