@@ -14,19 +14,25 @@ let winCounter = 0;
 
 const playAreaDiv = document.querySelector('.play-area');
 
-function displayByLetter (word, classOf){
+const hangManDiv = document.querySelector('.hangman-area');
 
-    life = 7;
-
+function displayByLetter (word, classOf, isGameOver = false){
+    
     word = word.split('');
     
     const divTarget = document.querySelector(`.${classOf}`);
 
     divTarget.innerHTML = '';
 
-    word.forEach(letter => {
-        divTarget.insertAdjacentHTML('beforeend',`<div class='${classOf === 'alphabet' ? 'letter' : 'secret'}'>${classOf === 'alphabet' ? letter : ''}</div>`);
-    });
+    if (!isGameOver) {
+        word.forEach(letter => {
+            divTarget.insertAdjacentHTML('beforeend',`<div class='${classOf === 'alphabet' ? 'letter' : 'secret'}'>${classOf === 'alphabet' ? letter : ''}</div>`);
+        });
+    }else {
+        word.forEach(letter => {
+            divTarget.insertAdjacentHTML('beforeend', `<div class='secret'>${letter}</div>`);
+        })
+    }
 }
 
 function getMatchingIndexes (clicked)  {
@@ -72,6 +78,8 @@ function checkClickedInSecret (clicked){
 
         life --;
 
+        hangManDiv.innerHTML = `<img src=img/health${life}.png />`;
+
         if (life > 0){
             infoDiv.textContent = `Wrong you lost a life, you only have ${life} left`;
             setTimeout(() => {
@@ -86,14 +94,18 @@ function isGameOver (){
     if (life === 0){
         infoDiv.textContent = 'you lost';
         playAreaDiv.classList.add('disabled');
+        displayByLetter(secretword,'secretWord', true);
     }
     else if (life > 0 && secretword.length === winCounter){
         infoDiv.textContent = 'you won';
         playAreaDiv.classList.add('disabled');
+        hangManDiv.innerHTML = `<img src=img/victoryIMG.png />`
     }
 }
 
 function startGame (){
+
+    life = 7;
 
     secretword = words[Math.round(Math.random()*words.length)];
 
@@ -109,6 +121,8 @@ function startGame (){
 
     const alphabetDiv = document.querySelectorAll('.letter');
 
+    hangManDiv.innerHTML = `<img src=img/baseIMG.png />`;
+
     alphabetDiv.forEach(letterdiv => {
 
         letterdiv.addEventListener('click', event => {
@@ -122,6 +136,8 @@ function startGame (){
             isGameOver();
 
             console.log(winCounter);
+
+            //hangManDiv.insertAdjacentHTML('beforeend',`<img src=img/healt${life}.png />`);
 
         });
 
