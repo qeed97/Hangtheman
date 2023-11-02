@@ -4,7 +4,7 @@ import { words } from './data.js';
 
 let abc = "abcdefghijklmnopqrstuvwxyz";
 
-let secretword 
+let secretword;
 
 const infoDiv = document.querySelector('.info');
 
@@ -15,6 +15,8 @@ let winCounter = 0;
 const playAreaDiv = document.querySelector('.play-area');
 
 const hangManDiv = document.querySelector('.hangman-area');
+
+const secretInput = document.querySelector('.player-input');
 
 function displayByLetter (word, classOf, isGameOver = false){
     
@@ -106,53 +108,59 @@ function isGameOver (){
 function startGame (){
 
     life = 7;
+
     winCounter = 0;
+    
+    secretword = secretInput.value;
+    secretInput.value = '';
 
-    secretword = words[Math.round(Math.random()*words.length)];
-
+    if (secretword === '') {
+        secretword = words[Math.round(Math.random()*words.length)];
+    }
+    
     console.log(secretword);
-
+    
     playAreaDiv.classList.remove('disabled');
-
+    
     displayByLetter(abc, 'alphabet');
-
+    
     displayByLetter(secretword, 'secretWord');
     
     infoDiv.textContent = 'Please click on a letter!';
-
+    
     const alphabetDiv = document.querySelectorAll('.letter');
-
+    
     hangManDiv.innerHTML = `<img src=img/baseIMG.png />`;
-
+    
     alphabetDiv.forEach(letterdiv => {
-
+        
         letterdiv.addEventListener('click', event => {
-
+            
             event.target.classList.add('disabled','disabledcolor');
-
+            
             checkClickedInSecret(event.target.textContent);
-
+            
             console.log(event.target.textContent);
-
+            
             isGameOver();
-
+            
             console.log(winCounter);
-
+            
             //hangManDiv.insertAdjacentHTML('beforeend',`<img src=img/healt${life}.png />`);
-
+            
         });
-
+        
     });
 }
 
 const loadEvent = () => {
-
+    
     infoDiv.textContent = "Welcome! Press 'New Game' to start the game!";
-
+    
     const startButton = document.querySelector('.startGame');
-
+    
     startButton.addEventListener('click',startGame);
-
+    
 }
 
 window.addEventListener('load',loadEvent);
