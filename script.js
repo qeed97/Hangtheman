@@ -155,7 +155,7 @@ function startGame (){
 
 const loadEvent = () => {
     
-    infoDiv.textContent = "Welcome! Press 'New Game' to start the game!";
+    infoDiv.textContent = "Welcome! Use the input field to choose your word or leave it empty for a random word! Press 'New Game' to play!";
     
     const startButton = document.querySelector('.startGame');
     
