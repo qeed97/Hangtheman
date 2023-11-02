@@ -1,10 +1,8 @@
 import { words } from './data.js';
 
-//console.log(words);
-
 let abc = "abcdefghijklmnopqrstuvwxyz";
 
-let secretword;
+let secretWord;
 
 const infoDiv = document.querySelector('.info');
 
@@ -28,7 +26,8 @@ function displayByLetter (word, classOf, isGameOver = false){
 
     if (!isGameOver) {
         word.forEach(letter => {
-            divTarget.insertAdjacentHTML('beforeend',`<div class='${classOf === 'alphabet' ? 'letter' : 'secret'}'>${classOf === 'alphabet' ? letter : ''}</div>`);
+            divTarget.insertAdjacentHTML('beforeend',`<div class='${classOf === 'alphabet' ?
+             'letter' : 'secret'}'>${classOf === 'alphabet' ? letter : ''}</div>`);
         });
     }else {
         word.forEach(letter => {
@@ -41,7 +40,7 @@ function getMatchingIndexes (clicked)  {
 
     let mathingIndex = [];
 
-    secretword.split('').forEach((letter,index) => {
+    secretWord.split('').forEach((letter,index) => {
 
         if (clicked === letter){
 
@@ -57,11 +56,11 @@ function getMatchingIndexes (clicked)  {
 
 function checkClickedInSecret (clicked){
 
-    if (secretword.includes(clicked)) {
+    if (secretWord.includes(clicked)) {
 
         const mathingIndexes = getMatchingIndexes(clicked);
 
-        secretword.split('').forEach((element,index) => {
+        secretWord.split('').forEach((element,index) => {
 
            if (mathingIndexes.includes(index)){
 
@@ -76,7 +75,7 @@ function checkClickedInSecret (clicked){
         });
 
     } 
-    else { //(!isGameOver()){
+    else {
 
         life --;
 
@@ -96,9 +95,9 @@ function isGameOver (){
     if (life === 0){
         infoDiv.textContent = 'You Lost!';
         playAreaDiv.classList.add('disabled');
-        displayByLetter(secretword,'secretWord', true);
+        displayByLetter(secretWord,'secretWord', true);
     }
-    else if (life > 0 && secretword.length === winCounter){
+    else if (life > 0 && secretWord.length === winCounter){
         infoDiv.textContent = 'You Won!';
         playAreaDiv.classList.add('disabled');
         hangManDiv.innerHTML = `<img src=img/victoryIMG.png />`
@@ -111,20 +110,18 @@ function startGame (){
 
     winCounter = 0;
     
-    secretword = secretInput.value;
+    secretWord = secretInput.value;
     secretInput.value = '';
 
-    if (secretword === '') {
-        secretword = words[Math.round(Math.random()*words.length)];
+    if (secretWord === '') {
+        secretWord = words[Math.round(Math.random()*words.length)];
     }
-    
-    console.log(secretword);
     
     playAreaDiv.classList.remove('disabled');
     
     displayByLetter(abc, 'alphabet');
     
-    displayByLetter(secretword, 'secretWord');
+    displayByLetter(secretWord, 'secretWord');
     
     infoDiv.textContent = 'Please click on a letter!';
     
@@ -140,14 +137,8 @@ function startGame (){
             
             checkClickedInSecret(event.target.textContent);
             
-            console.log(event.target.textContent);
-            
             isGameOver();
-            
-            console.log(winCounter);
-            
-            //hangManDiv.insertAdjacentHTML('beforeend',`<img src=img/healt${life}.png />`);
-            
+              
         });
         
     });
