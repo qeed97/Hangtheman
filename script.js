@@ -27,11 +27,11 @@ function displayByLetter (word, classOf, isGameOver = false){
     if (!isGameOver) {
         word.forEach(letter => {
             divTarget.insertAdjacentHTML('beforeend',`<div class='${classOf === 'alphabet' ?
-             'letter' : 'secret'}'>${classOf === 'alphabet' ? letter : ''}</div>`);
+             'letter' : letter == ' ' ? 'secret space' : 'secret'}'>${classOf === 'alphabet' ? letter : ''}</div>`);
         });
     }else {
         word.forEach(letter => {
-            divTarget.insertAdjacentHTML('beforeend', `<div class='secret'>${letter}</div>`);
+            divTarget.insertAdjacentHTML('beforeend', `<div class='${letter === ' ' ? 'secret space' : 'secret'}'>${letter}</div>`);
         })
     }
 }
@@ -117,6 +117,9 @@ function startGame (){
         secretWord = words[Math.round(Math.random()*words.length)];
     }
     
+    const secretWordLength = secretWord.replaceAll(' ', '').length;
+    winCounter = secretWord.length - secretWordLength;
+
     playAreaDiv.classList.remove('disabled');
     
     displayByLetter(abc, 'alphabet');
