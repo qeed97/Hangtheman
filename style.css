@@ -30,7 +30,7 @@ h2 {
 }
 
 .startGame {
-    margin: 0 auto;
+    margin: .25rem auto;
     padding: .5rem;
     border-radius: 5px;
     cursor: pointer;
@@ -52,7 +52,7 @@ h2 {
 
 main {
     position: relative;
-    height: 85vh;
+    height: 80vh;
     width: 100%;
     display: flex;
 }
@@ -95,7 +95,7 @@ main {
 
 img {
     position: relative;
-    top: 9px;
+    top: 17px;
     left: 5px;
     width: 99%;
     height: 99%;
@@ -130,4 +130,11 @@ img {
 
 .disabledcolor{
     background-color: rgba(51, 51, 51, .5);
+}
+
+.player-input {
+    position: relative;
+    height: 2.5vh;
+    display: block;
+    margin: .5rem auto;
 }
