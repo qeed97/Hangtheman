@@ -83,8 +83,10 @@ function checkClickedInSecret (clicked){
 
         if (life > 0){
             infoDiv.textContent = `Wrong you lost a life! You only have ${life} left!`;
+            playAreaDiv.classList.add('disabled');
             setTimeout(() => {
                 infoDiv.textContent = 'Please click on a letter!';
+                playAreaDiv.classList.remove('disabled');
             },1000);
         }
     }
